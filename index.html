@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1427">
+  <meta name="description" content="KtirioCheck — οργανωμένος προέλεγχος ακινήτου στην Ελλάδα για αγορά ή ενοικίαση.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>KtirioCheck · Ο έλεγχος πριν από την απόφαση</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./src/app.mjs"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <dialog id="new-case-dialog" class="app-dialog" aria-labelledby="new-case-title">
+    <div class="dialog-top">
+      <div class="dialog-symbol">⌂</div>
+      <button type="button" class="icon-btn close-dialog" data-close-dialog="new-case-dialog" aria-label="Κλείσιμο">×</button>
+    </div>
+    <h2 id="new-case-title">Νέος φάκελος ακινήτου</h2>
+    <p class="muted">Ξεκίνα με τα βασικά. Μπορείς να παρακολουθείς περισσότερα από ένα ακίνητα.</p>
+    <form id="new-case-form" class="new-case-form">
+      <label for="case-name">Όνομα φακέλου <span class="required">*</span></label>
+      <input id="case-name" name="name" required maxlength="100" placeholder="π.χ. Διαμέρισμα στην Κυψέλη" autocomplete="off">
+      <label for="case-area">Περιοχή <span class="optional">προαιρετικό</span></label>
+      <input id="case-area" name="area" maxlength="100" placeholder="π.χ. Αθήνα" autocomplete="off">
+      <label for="case-mode">Σκοπός ελέγχου</label>
+      <select id="case-mode" name="mode"><option value="buy">Αγορά ακινήτου</option><option value="rent">Ενοικίαση ακινήτου</option></select>
+      <div class="info-row"><span class="info-dot">i</span> Μην εισάγεις ΑΦΜ, κωδικούς, ονόματα τρίτων ή άλλα ευαίσθητα δεδομένα.</div>
+      <div class="dialog-actions"><button type="button" class="btn ghost" data-close-dialog="new-case-dialog">Ακύρωση</button><button type="submit" class="btn primary">Δημιουργία φακέλου <span aria-hidden="true">↗</span></button></div>
+    </form>
+  </dialog>
+  <dialog id="report-dialog" class="report-dialog" aria-labelledby="report-title">
+    <div class="report-actions no-print"><button type="button" class="btn ghost" data-close-dialog="report-dialog">← Επιστροφή</button><button type="button" class="btn dark" data-action="print">Εκτύπωση / PDF ↗</button></div>
+    <div id="report-body"></div>
+  </dialog>
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
